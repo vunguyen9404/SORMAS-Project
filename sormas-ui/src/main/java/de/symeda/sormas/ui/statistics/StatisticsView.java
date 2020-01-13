@@ -733,7 +733,7 @@ public class StatisticsView extends AbstractStatisticsView {
 		GeoLatLon mapCenter = FacadeProvider.getGeoShapeProvider().getCenterOfAllRegions();
 		map.setCenter(mapCenter.getLon(), mapCenter.getLat());
 
-		List<RegionReferenceDto> regions = FacadeProvider.getRegionFacade().getAllAsReference();
+		List<RegionReferenceDto> regions = FacadeProvider.getRegionFacade().getAllActiveAsReference();
 
 		List<LeafletPolygon> outlinePolygones = new ArrayList<LeafletPolygon>();
 

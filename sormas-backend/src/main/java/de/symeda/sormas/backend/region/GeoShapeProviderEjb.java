@@ -187,7 +187,7 @@ public class GeoShapeProviderEjb implements GeoShapeProvider {
 			ContentFeatureSource featureSource = dataStore.getFeatureSource();
 			ContentFeatureCollection featureCollection = featureSource.getFeatures();
 
-			List<RegionReferenceDto> regions = regionFacade.getAllAsReference();
+			List<RegionReferenceDto> regions = regionFacade.getAllActiveAsReference();
 
 			SimpleFeatureIterator iterator = featureCollection.features();
 			while (iterator.hasNext()) {
@@ -271,7 +271,7 @@ public class GeoShapeProviderEjb implements GeoShapeProvider {
 			ContentFeatureSource featureSource = dataStore.getFeatureSource();
 			ContentFeatureCollection featureCollection = featureSource.getFeatures();
 
-			List<DistrictReferenceDto> districts = districtFacade.getAllAsReference();
+			List<DistrictReferenceDto> districts = districtFacade.getAllActiveAsReference();
 
 			SimpleFeatureIterator iterator = featureCollection.features();
 			while (iterator.hasNext()) {
