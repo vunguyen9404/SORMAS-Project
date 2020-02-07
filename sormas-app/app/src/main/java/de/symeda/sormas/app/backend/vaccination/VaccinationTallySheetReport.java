@@ -56,7 +56,7 @@ public class VaccinationTallySheetReport {
         this.refRemainingCount = refRemainingCount;
         this.vialsReceivedFull = vialsReceivedFull;
         this.vialsReceivedOpen = vialsReceivedOpen;
-        this.vialsReturnedFull = vialsReceivedFull;
+        this.vialsReturnedFull = vialsReturnedFull;
         this.vialsReturnedOpen = vialsReturnedOpen;
         this.vialsReturnedEmpty = vialsReturnedEmpty;
     }

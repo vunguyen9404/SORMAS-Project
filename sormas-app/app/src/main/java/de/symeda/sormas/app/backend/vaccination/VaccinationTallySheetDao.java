@@ -137,9 +137,23 @@ public class VaccinationTallySheetDao extends AbstractAdoDao<VaccinationTallyShe
                             "SUM(v.numberOfChildrenResident), " +
                             "SUM(v.numberOfChildrenGuest), " +
                             "SUM(v.numberOfChildrenVaccinated), " +
-                            "COUNT(a.id), " +
                             "s.numberOfVaccinatedChildren - SUM(v.numberOfChildrenVaccinated), " +
                             "s.numberOfVaccinatedNomadChildren, " +
+                            "s.numberOfVialsReceivedFull, " +
+                            "s.numberOfVialsReceivedOpen, " +
+                            "s.numberOfVialsReturnedFull, " +
+                            "s.numberOfVialsReturnedOpen, " +
+                            "s.numberOfVialsReturnedEmpty " +
+                            "FROM vaccinationTallySheet s " +
+                            "LEFT JOIN vaccinationVisit v ON v.vaccinationTallySheet_id = s.id AND v.snapshot = 0 " +
+                            "WHERE s.id = " + sheet.getId() + " AND s.snapshot = 0;",
+                    new DataType[]{DataType.STRING});
+            List<Object[]> results = rawResults.getResults();
+            Object[] resultArray = results.get(0);
+
+            GenericRawResults<Object[]> rawAbsenceResults = queryRaw(
+                    "SELECT " +
+                            "COUNT(a.id), " +
                             "COUNT(CASE WHEN a.absenceReason = 'RETURN_DURING_CAMPAIGN' AND a.absenceOutcome = 'FOUND_VACCINATED' THEN 1 ELSE null END), " +
                             "COUNT(CASE WHEN a.absenceReason = 'RETURN_DURING_CAMPAIGN' AND a.absenceOutcome = 'VACCINATED_DURING_REVISIT' THEN 1 ELSE null END), " +
                             "COUNT(CASE WHEN a.absenceReason = 'RETURN_DURING_CAMPAIGN' AND a.absenceOutcome IS NULL THEN 1 ELSE null END), " +
@@ -151,45 +165,39 @@ public class VaccinationTallySheetDao extends AbstractAdoDao<VaccinationTallyShe
                             "COUNT(CASE WHEN a.absenceReason = 'NEWBORN_SICK_SLEEPING' AND a.absenceOutcome IS NULL THEN 1 ELSE null END), " +
                             "COUNT(CASE WHEN a.absenceReason = 'REFUSAL' AND a.absenceOutcome = 'FOUND_VACCINATED' THEN 1 ELSE null END), " +
                             "COUNT(CASE WHEN a.absenceReason = 'REFUSAL' AND a.absenceOutcome = 'VACCINATED_DURING_REVISIT' THEN 1 ELSE null END), " +
-                            "COUNT(CASE WHEN a.absenceReason = 'REFUSAL' AND a.absenceOutcome IS NULL THEN 1 ELSE null END), " +
-                            "s.numberOfVialsReceivedFull, " +
-                            "s.numberOfVialsReceivedOpen, " +
-                            "s.numberOfVialsReturnedFull, " +
-                            "s.numberOfVialsReturnedOpen, " +
-                            "s.numberOfVialsReturnedEmpty " +
+                            "COUNT(CASE WHEN a.absenceReason = 'REFUSAL' AND a.absenceOutcome IS NULL THEN 1 ELSE null END) " +
                             "FROM vaccinationTallySheet s " +
-                            "LEFT JOIN vaccinationVisit v ON v.vaccinationTallySheet_id = s.id AND v.snapshot = 0 " +
                             "LEFT JOIN vaccinationAbsence a ON a.vaccinationTallySheet_id = s.id AND a.snapshot = 0 " +
                             "WHERE s.id = " + sheet.getId() + " AND s.snapshot = 0;",
                     new DataType[]{DataType.STRING});
+            List<Object[]> absenceResults = rawAbsenceResults.getResults();
+            Object[] absenceResultArray = absenceResults.get(0);
 
-            List<Object[]> results = rawResults.getResults();
-            Object[] resultArray = results.get(0);
             return new VaccinationTallySheetReport(
                     resultArray[0] != null ? Integer.parseInt((String) resultArray[0]) : 0,
                     resultArray[1] != null ? Integer.parseInt((String) resultArray[1]) : 0,
                     resultArray[2] != null ? Integer.parseInt((String) resultArray[2]) : 0,
                     resultArray[3] != null ? Integer.parseInt((String) resultArray[3]) : 0,
+                    absenceResultArray[0] != null ? Integer.parseInt((String) absenceResultArray[0]) : 0,
                     resultArray[4] != null ? Integer.parseInt((String) resultArray[4]) : 0,
                     resultArray[5] != null ? Integer.parseInt((String) resultArray[5]) : 0,
+                    absenceResultArray[1] != null ? Integer.parseInt((String) absenceResultArray[1]) : 0,
+                    absenceResultArray[2] != null ? Integer.parseInt((String) absenceResultArray[2]) : 0,
+                    absenceResultArray[3] != null ? Integer.parseInt((String) absenceResultArray[3]) : 0,
+                    absenceResultArray[4] != null ? Integer.parseInt((String) absenceResultArray[4]) : 0,
+                    absenceResultArray[5] != null ? Integer.parseInt((String) absenceResultArray[5]) : 0,
+                    absenceResultArray[6] != null ? Integer.parseInt((String) absenceResultArray[6]) : 0,
+                    absenceResultArray[7] != null ? Integer.parseInt((String) absenceResultArray[7]) : 0,
+                    absenceResultArray[8] != null ? Integer.parseInt((String) absenceResultArray[8]) : 0,
+                    absenceResultArray[9] != null ? Integer.parseInt((String) absenceResultArray[9]) : 0,
+                    absenceResultArray[10] != null ? Integer.parseInt((String) absenceResultArray[10]) : 0,
+                    absenceResultArray[11] != null ? Integer.parseInt((String) absenceResultArray[11]) : 0,
+                    absenceResultArray[12] != null ? Integer.parseInt((String) absenceResultArray[12]) : 0,
                     resultArray[6] != null ? Integer.parseInt((String) resultArray[6]) : 0,
                     resultArray[7] != null ? Integer.parseInt((String) resultArray[7]) : 0,
                     resultArray[8] != null ? Integer.parseInt((String) resultArray[8]) : 0,
                     resultArray[9] != null ? Integer.parseInt((String) resultArray[9]) : 0,
-                    resultArray[10] != null ? Integer.parseInt((String) resultArray[10]) : 0,
-                    resultArray[11] != null ? Integer.parseInt((String) resultArray[11]) : 0,
-                    resultArray[12] != null ? Integer.parseInt((String) resultArray[12]) : 0,
-                    resultArray[13] != null ? Integer.parseInt((String) resultArray[13]) : 0,
-                    resultArray[14] != null ? Integer.parseInt((String) resultArray[14]) : 0,
-                    resultArray[15] != null ? Integer.parseInt((String) resultArray[15]) : 0,
-                    resultArray[16] != null ? Integer.parseInt((String) resultArray[16]) : 0,
-                    resultArray[17] != null ? Integer.parseInt((String) resultArray[17]) : 0,
-                    resultArray[18] != null ? Integer.parseInt((String) resultArray[18]) : 0,
-                    resultArray[19] != null ? Integer.parseInt((String) resultArray[19]) : 0,
-                    resultArray[20] != null ? Integer.parseInt((String) resultArray[20]) : 0,
-                    resultArray[21] != null ? Integer.parseInt((String) resultArray[21]) : 0,
-                    resultArray[22] != null ? Integer.parseInt((String) resultArray[22]) : 0,
-                    resultArray[23] != null ? Integer.parseInt((String) resultArray[23]) : 0);
+                    resultArray[10] != null ? Integer.parseInt((String) resultArray[10]) : 0);
         } catch (SQLException e) {
             Log.e(getTableName(), "Could not perform generateReport on VaccinationTallySheet");
             throw new RuntimeException(e);

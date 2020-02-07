@@ -480,6 +480,7 @@
                     android:orientation="vertical"
                     android:paddingBottom="0dp"
                     android:paddingTop="0dp">
+
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
@@ -549,7 +550,9 @@
                                 android:paddingStart="2dp" />
 
                         </LinearLayout>
+
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -559,6 +562,7 @@
                     android:orientation="vertical"
                     android:paddingBottom="0dp"
                     android:paddingTop="0dp">
+
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
@@ -628,6 +632,7 @@
                                 android:paddingStart="2dp" />
 
                         </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -639,6 +644,7 @@
                     android:orientation="vertical"
                     android:paddingBottom="0dp"
                     android:paddingTop="0dp">
+
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
@@ -708,7 +714,9 @@
                                 android:paddingStart="2dp" />
 
                         </LinearLayout>
+
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -718,6 +726,7 @@
                     android:orientation="vertical"
                     android:paddingBottom="0dp"
                     android:paddingTop="0dp">
+
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
@@ -787,7 +796,9 @@
                                 android:paddingStart="2dp" />
 
                         </LinearLayout>
+
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -797,6 +808,7 @@
                     android:orientation="vertical"
                     android:paddingBottom="0dp"
                     android:paddingTop="0dp">
+
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
@@ -866,7 +878,9 @@
                                 android:paddingStart="2dp" />
 
                         </LinearLayout>
+
                     </LinearLayout>
+
                 </LinearLayout>
 
                 <TextView
@@ -1022,8 +1036,8 @@
                                 android:paddingStart="2dp" />
 
                         </LinearLayout>
-                    </LinearLayout>
 
+                    </LinearLayout>
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -1073,8 +1087,8 @@
                                 android:paddingStart="2dp" />
 
                         </LinearLayout>
-                    </LinearLayout>
 
+                    </LinearLayout>
 
                     <LinearLayout
                         android:orientation="horizontal"
@@ -1123,6 +1137,7 @@
                                 android:paddingStart="2dp" />
 
                         </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
