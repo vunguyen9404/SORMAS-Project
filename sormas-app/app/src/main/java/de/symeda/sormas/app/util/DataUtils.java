@@ -94,6 +94,18 @@ public class DataUtils {
         return listOut;
     }
 
+    public static List<Item> getNumberItems(int from, int to, boolean withNull) {
+        List<Item> listOut = new ArrayList<>();
+        if (withNull) {
+            listOut.add(new Item<Integer>("", null));
+        }
+        while (from <= to) {
+            listOut.add(new Item<>(String.valueOf(from), from));
+            from++;
+        }
+        return listOut;
+    }
+
     public static <E> List<Item> toItems(List<E> listIn, boolean withNull) {
         List<Item> listOut = new ArrayList<>();
         if (withNull) {

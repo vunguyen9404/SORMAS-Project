@@ -34,6 +34,7 @@ import de.symeda.sormas.app.report.ReportActivity;
 import de.symeda.sormas.app.report.aggregate.AggregateReportsActivity;
 import de.symeda.sormas.app.sample.list.SampleListActivity;
 import de.symeda.sormas.app.task.list.TaskListActivity;
+import de.symeda.sormas.app.vaccination.list.VaccinationTallySheetListActivity;
 
 public class NavigationHelper {
 
@@ -81,6 +82,10 @@ public class NavigationHelper {
     public static void goToReports(Context context) {
         Intent intent = new Intent(context, ReportActivity.class);
         context.startActivity(intent);
+    }
+
+    public static void goToVaccinationCampaign(Context context) {
+        VaccinationTallySheetListActivity.startActivity(context);
     }
 
     public static void goToNewCase(Context context) {

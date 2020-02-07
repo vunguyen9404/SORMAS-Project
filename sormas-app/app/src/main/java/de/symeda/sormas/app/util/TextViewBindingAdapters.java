@@ -105,6 +105,11 @@ public class TextViewBindingAdapters {
         }
     }
 
+    @BindingAdapter(value={"value", "prependValue", "valueFormat", "defaultValue"})
+    public static void setValueWithPrepend(TextView textField, Integer intValue, String prependValue, String valueFormat, String defaultValue) {
+        setValueWithPrepend(textField, String.valueOf(intValue), prependValue, valueFormat, defaultValue);
+    }
+
     @BindingAdapter(value={"value", "prependValue", "valueFormat", "defaultValue"}, requireAll=true)
     public static void setValueWithPrepend(TextView textField, Enum enumValue, String prependValue, String valueFormat, String defaultValue) {
         String val = defaultValue;
@@ -155,17 +160,20 @@ public class TextViewBindingAdapters {
 
     @BindingAdapter(value={"value", "prependValue", "appendValue", "valueFormat", "defaultValue"}, requireAll=true)
     public static void setValueWithPrepend(TextView textField, Integer integerValue, String prependValue, String appendValue, String valueFormat, String defaultValue) {
-        String val = defaultValue;
-        String stringValue = (integerValue != null) ? integerValue.toString() : "";
+        setValueWithPrepend(textField, integerValue != null ? integerValue.toString() : "", prependValue, appendValue, valueFormat, defaultValue);
+    }
 
-        if (integerValue == null) {
+    @BindingAdapter(value={"value", "prependValue", "appendValue", "valueFormat", "defaultValue"}, requireAll=true)
+    public static void setValueWithPrepend(TextView textField, String value, String prependValue, String appendValue, String valueFormat, String defaultValue) {
+        String val = defaultValue;
+
+        if (StringUtils.isEmpty(value)) {
             textField.setText(prependValue + ": " + val);
         } else {
-            val = stringValue;
-            //textField.setText(val);
+            val = value;
 
-            if (valueFormat != null && valueFormat.trim() != "") {
-                textField.setText(String.format(valueFormat, prependValue, stringValue, appendValue));
+            if (valueFormat != null && !valueFormat.trim().equals("")) {
+                textField.setText(String.format(valueFormat, prependValue, value, appendValue));
             } else {
                 textField.setText(prependValue + ": " + val);
             }

@@ -34,5 +34,6 @@
     <string name="two_strings_format">%1$s %2$s</string>
     <string name="two_strings_with_brackets_format">%1$s (%2$s)</string>
     <string name="two_strings_with_hyphen_format">%1$s - %2$s</string>
+    <string name="three_strings_with_hyphen_format">%1$s %2$s - %3$s</string>
 
 </resources>

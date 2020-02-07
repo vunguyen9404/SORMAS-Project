@@ -114,6 +114,11 @@
     <string name="action_save_pathogen_test">Save Pathogen Test</string>
     <string name="action_edit_pathogen_test">Edit Pathogen Test</string>
     <string name="action_submit_case_numbers">Submit Case Numbers</string>
+    <string name="action_new_vaccination_tally_sheet">New Tally Sheet</string>
+    <string name="action_save_vaccination_tally_sheet">Save Tally Sheet</string>
+    <string name="action_add_house">Add House</string>
+    <string name="action_save_child_counts">Save Child Counts</string>
+    <string name="action_discard">Discard</string>
 
     <string name="caption_address">Address</string>
     <string name="caption_age">Age</string>
@@ -228,6 +233,38 @@
     <string name="caption_aggregate_new_cases_abbr">C</string>
     <string name="caption_aggregate_lab_confirmations_abbr">L</string>
     <string name="caption_aggregate_deaths_abbr">D</string>
+    <string name="caption_vaccination_tally_sheet_header">Tally Sheet Header</string>
+    <string name="caption_vaccination_house_child_counts">House Child Counts</string>
+    <string name="caption_vaccination_missed_children">Missed Children</string>
+    <string name="caption_vaccination_tally_sheet_footer">Tally Sheet Footer</string>
+    <string name="caption_campaign_day">Day</string>
+    <string name="caption_cluster_number">Cluster</string>
+    <string name="caption_house">House</string>
+    <string name="caption_team">Team</string>
+    <string name="caption_number_of_vaccinated_children">Vaccinated Children</string>
+    <string name="caption_number_of_missed_children">Missed Children</string>
+    <string name="caption_vaccination_tally_sheet_report">Tally Sheet Report</string>
+    <string name="caption_vaccination_houses_visited">Houses Visited</string>
+    <string name="caption_vaccination_children_resident">Children (0&#8211;5 Years) Resident in the House</string>
+    <string name="caption_vaccination_children_guest">Children (0&#8211;5 Years) Guest in the House</string>
+    <string name="caption_vaccination_children_vaccinated">Children (0&#8211;5 Years) Vaccinated in Houses</string>
+    <string name="caption_vaccination_children_missed">Children (0&#8211;5 Years) Missed</string>
+    <string name="caption_vaccination_children_vaccinated_outside">Children (0&#8211;5 Years) Vaccinated Outside of Houses</string>
+    <string name="caption_vaccination_children_nomad_vaccinated">Nomad Children (0&#8211;5 Years) Vaccinated</string>
+    <string name="caption_vaccination_number_of_children">Number of Children (0&#8211;5 Years)</string>
+    <string name="caption_vaccination_recorded">Recorded</string>
+    <string name="caption_vaccination_remaining">Remaining</string>
+    <string name="caption_vaccination_total_recovered">Total Recovered</string>
+    <string name="caption_vaccination_return_during_campaign_short">RDC</string>
+    <string name="caption_vaccination_return_after_campaign_short">RAC</string>
+    <string name="caption_vaccination_newborn_sick_sleeping_short">N/S/S</string>
+    <string name="caption_vaccination_refusal_short">Ref</string>
+    <string name="caption_vaccination_total_vaccinated_children">Total Number of Children Vaccinated by Team</string>
+    <string name="caption_received">Received</string>
+    <string name="caption_returned">Returned</string>
+    <string name="caption_full">Full</string>
+    <string name="caption_open">Open</string>
+    <string name="caption_empty">Empty</string>
 
     <string name="confirmation_action">Are you sure you want to do this?</string>
     <string name="confirmation_delete">Are you sure you want to delete this record?</string>
@@ -249,6 +286,10 @@
     <string name="entity_event">Event</string>
     <string name="entity_sample">Sample</string>
     <string name="entity_task">Task</string>
+    <string name="entity_child_counts">Child Counts</string>
+    <string name="entity_child_count">Child Count</string>
+    <string name="entity_missed_child">Missed Child</string>
+    <string name="entity_vaccination_tally_sheet">Vaccination Tally Sheet</string>
 
     <string name="error_case_transfer">An error occurred while trying to transfer the case.</string>
     <string name="error_case_referring_from_poe">An error occurred while trying to refer the case.</string>
@@ -361,6 +402,17 @@
     <string name="heading_unsynchronized_changes">Unsynchronized Changes</string>
     <string name="heading_user_report">Report a problem</string>
     <string name="heading_change_laboratory_result">Change Laboratory Result</string>
+    <string name="heading_vaccination_tally_sheets_list">Vaccination Tally Sheets</string>
+    <string name="heading_vaccination_tally_sheet_new">New Tally Sheet</string>
+    <string name="heading_vaccination_tally_sheet_edit">Edit Tally Sheet</string>
+    <string name="heading_opv_vials_received">OPV Vials Received</string>
+    <string name="heading_opv_vials_returned">OPV Vials Returned</string>
+    <string name="heading_missed_child">Missed Child</string>
+    <string name="heading_delete_child_counts">Delete Child Counts</string>
+    <string name="heading_vaccination_daily_numbers">Daily Vaccination Numbers</string>
+    <string name="heading_vaccination_missed_children">Missed Children</string>
+    <string name="heading_vials">Vials</string>
+    <string name="heading_delete_tally_sheet">Delete Tally Sheet</string>
 
     <string name="hint_add_to_empty_list">Add a new entry by pressing the "+" symbol in the top right.</string>
     <string name="hint_clear">Clear</string>
@@ -418,6 +470,7 @@
     <string name="info_pick_or_create_case">There is at least one existing case in the database that seems very similar to the one you are about to create. Please do one of the following:\n\n\u2022 Tap on a case that you <b>are sure</b> is the same case that you were about to create\n\u2022 Scroll to the bottom of this window and check the check box if you <b>are sure</b> that your case is a new case\n\nClick on the button in the bottom right to confirm your choice.</string>
     <string name="info_case_creation_mark_check_box">This case is a <b>new case</b> and <b>not a duplicate</b> of one of the cases above</string>
     <string name="info_aggregate_report_legend">C = New cases; L = Lab confirmations; D = Deaths</string>
+    <string name="info_vaccination_report_legend">RDC = Return during campaign; RAC = Return after campaign; N/S/S = Newborn/sick/sleeping; Ref = Refusal</string>
 
     <string name="main_menu_cases">Cases</string>
     <string name="main_menu_contacts">Contacts</string>
@@ -428,6 +481,7 @@
     <string name="main_menu_settings">Settings</string>
     <string name="main_menu_tasks">Tasks</string>
     <string name="main_menu_aggregate_reports">mSERS</string>
+    <string name="main_menu_vaccination_campaign">Vaccination</string>
 
     <string name="message_already_saving">Already saving..</string>
     <string name="message_case_infrastructure_data_changed">You have changed the infrastructure data of this case. Do you want to transfer the case to the new health facility (the hospitalization data will be updated) or do you only want to edit the data to correct a mistake?</string>
@@ -461,6 +515,8 @@
     <string name="message_report_sent">Problem report successfully sent.</string>
     <string name="message_save_error">%1$s could not be saved because of an internal error.</string>
     <string name="message_save_success">%1$s saved successfully.</string>
+    <string name="message_delete_error">%1$s could not be deleted because of an internal error.</string>
+    <string name="message_delete_success">%1$s deleted successfully.</string>
     <string name="message_settings_saved">Application settings has been changed.</string>
     <string name="message_sync_conflict">Synchronization conflicts detected. Please check the Sync Log to review them.</string>
     <string name="message_sync_not_synchronized">Some entries could not be synchronized. Please try again later.</string>
@@ -472,6 +528,8 @@
     <string name="message_weekly_report_submitted">Thank you for submitting your weekly report.</string>
     <string name="message_case_numbers_submitted">Thank you for submitting your collected case numbers.</string>
     <string name="message_change_final_laboratory_result">The result of this pathogen test differs from the current final laboratory result of the sample. Do you want to update the final laboratory result?</string>
+    <string name="message_delete_child_counts">Are you sure you want to delete these child counts?</string>
+    <string name="message_delete_tally_sheet">Are you sure you want to delete this vaccination tally sheet and all its associated data?</string>
 
     <string name="notification_channel_tasks_name">New or Updated Tasks</string>
     <string name="notification_channel_tasks_description">Receive a notification when a new task is assigned to you or a task assigned to you has been edited</string>

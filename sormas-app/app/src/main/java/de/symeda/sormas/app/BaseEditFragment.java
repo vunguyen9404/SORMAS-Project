@@ -260,6 +260,10 @@ public abstract class BaseEditFragment<TBinding extends ViewDataBinding, TData, 
         return false;
     }
 
+    public boolean isShowDeleteAction() {
+        return false;
+    }
+
 //    @Override
 //    public void onDestroy() {
 //        super.onDestroy();

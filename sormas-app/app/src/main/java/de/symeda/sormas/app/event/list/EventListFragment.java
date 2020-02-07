@@ -71,5 +71,6 @@ public class EventListFragment extends PagedBaseListFragment<EventListAdapter> i
         recyclerViewForList.setLayoutManager(linearLayoutManager);
         recyclerViewForList.setAdapter(getListAdapter());
     }
+
 }
 

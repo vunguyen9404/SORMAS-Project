@@ -114,6 +114,12 @@ import de.symeda.sormas.app.backend.user.User;
 import de.symeda.sormas.app.backend.user.UserDao;
 import de.symeda.sormas.app.backend.user.UserRoleConfig;
 import de.symeda.sormas.app.backend.user.UserRoleConfigDao;
+import de.symeda.sormas.app.backend.vaccination.VaccinationAbsence;
+import de.symeda.sormas.app.backend.vaccination.VaccinationAbsenceDao;
+import de.symeda.sormas.app.backend.vaccination.VaccinationTallySheet;
+import de.symeda.sormas.app.backend.vaccination.VaccinationTallySheetDao;
+import de.symeda.sormas.app.backend.vaccination.VaccinationVisit;
+import de.symeda.sormas.app.backend.vaccination.VaccinationVisitDao;
 import de.symeda.sormas.app.backend.visit.Visit;
 import de.symeda.sormas.app.backend.visit.VisitDao;
 
@@ -127,7 +133,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	// name of the database file for your application. Stored in data/data/de.symeda.sormas.app/databases
 	public static final String DATABASE_NAME = "sormas.db";
 	// any time you make changes to your database objects, you may have to increase the database version
-	public static final int DATABASE_VERSION = 178;
+	public static final int DATABASE_VERSION = 179;
 
 	private static DatabaseHelper instance = null;
 	public static void init(Context context) {
@@ -193,6 +199,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.clearTable(connectionSource, Outbreak.class);
 			TableUtils.clearTable(connectionSource, SyncLog.class);
 			TableUtils.clearTable(connectionSource, DiseaseClassificationCriteria.class);
+			TableUtils.clearTable(connectionSource, VaccinationTallySheet.class);
+			TableUtils.clearTable(connectionSource, VaccinationVisit.class);
+			TableUtils.clearTable(connectionSource, VaccinationAbsence.class);
 
 			if (clearInfrastructure) {
 				TableUtils.clearTable(connectionSource, User.class);
@@ -268,6 +277,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(connectionSource, AggregateReport.class);
 			TableUtils.createTable(connectionSource, Outbreak.class);
 			TableUtils.createTable(connectionSource, DiseaseClassificationCriteria.class);
+			TableUtils.createTable(connectionSource, VaccinationTallySheet.class);
+			TableUtils.createTable(connectionSource, VaccinationVisit.class);
+			TableUtils.createTable(connectionSource, VaccinationAbsence.class);
 		} catch (SQLException e) {
 			Log.e(DatabaseHelper.class.getName(), "Can't build database", e);
 			throw new RuntimeException(e);
@@ -1405,6 +1417,70 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 					getDao(Case.class).executeRaw("UPDATE featureConfiguration SET disease = 'NEW_INFLUENZA' WHERE disease = 'NEW_INFLUENCA';");
 					getDao(Case.class).executeRaw("UPDATE pathogenTest SET testedDisease = 'NEW_INFLUENZA' WHERE testedDisease = 'NEW_INFLUENCA';");
 					getDao(Case.class).executeRaw("UPDATE users SET limitedDisease = 'NEW_INFLUENZA' WHERE limitedDisease = 'NEW_INFLUENCA';");
+				case 178:
+					currentVersion = 178;
+					getDao(VaccinationTallySheet.class).executeRaw("CREATE TABLE vaccinationTallySheet(" +
+							"id integer primary key autoincrement," +
+							"uuid varchar(36) not null," +
+							"changeDate timestamp not null," +
+							"creationDate timestamp not null," +
+							"lastOpenedDate timestamp," +
+							"localChangeDate timestamp not null," +
+							"modified integer," +
+							"snapshot integer," +
+							"region_id bigint REFERENCES region(id)," +
+							"district_id bigint REFERENCES district(id)," +
+							"village varchar(512)," +
+							"campaignDay integer," +
+							"date timestamp," +
+							"clusterNumber varchar(512)," +
+							"teamNumber varchar(512)," +
+							"clusterSupervisor varchar(512)," +
+							"communicationSupervisor varchar(512)," +
+							"volunteer1 varchar(512)," +
+							"volunteer2 varchar(512)," +
+							"socialMobilizer varchar(512)," +
+							"numberOfVialsReceivedFull integer," +
+							"numberOfVialsReceivedOpen integer," +
+							"firstHouseOwnerDetails varchar(512)," +
+							"lastHouseOwnerDetails varchar(512)," +
+							"numberOfVaccinatedChildren integer," +
+							"numberOfVaccinatedNomadChildren integer," +
+							"numberOfVialsReturnedFull integer," +
+							"numberOfVialsReturnedOpen integer," +
+							"numberOfVialsReturnedEmpty integer," +
+							"UNIQUE(snapshot, uuid));");
+					getDao(VaccinationVisit.class).executeRaw("CREATE TABLE vaccinationVisit(" +
+							"id integer primary key autoincrement," +
+							"uuid varchar(36) not null," +
+							"changeDate timestamp not null," +
+							"creationDate timestamp not null," +
+							"lastOpenedDate timestamp," +
+							"localChangeDate timestamp not null," +
+							"modified integer," +
+							"snapshot integer," +
+							"vaccinationTallySheet_id bigint REFERENCES vaccinationTallySheet(id)," +
+							"houseNumber varchar(512)," +
+							"numberOfChildrenResident integer," +
+							"numberOfChildrenGuest integer," +
+							"numberOfChildrenVaccinated integer," +
+							"UNIQUE(snapshot, uuid));");
+					getDao(VaccinationAbsence.class).executeRaw("CREATE TABLE vaccinationAbsence(" +
+							"id integer primary key autoincrement," +
+							"uuid varchar(36) not null," +
+							"changeDate timestamp not null," +
+							"creationDate timestamp not null," +
+							"lastOpenedDate timestamp," +
+							"localChangeDate timestamp not null," +
+							"modified integer," +
+							"snapshot integer," +
+							"vaccinationTallySheet_id bigint REFERENCES vaccinationTallySheet(id)," +
+							"houseNumber varchar(512)," +
+							"childName varchar(512)," +
+							"parentName varchar(512)," +
+							"absenceReason varchar(255)," +
+							"absenceOutcome varchar(255)," +
+							"UNIQUE(snapshot, uuid));");
 
 					// ATTENTION: break should only be done after last version
 					break;
@@ -1460,6 +1536,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.dropTable(connectionSource, DiseaseClassificationCriteria.class, true);
 			TableUtils.dropTable(connectionSource, DiseaseConfiguration.class, true);
 			TableUtils.dropTable(connectionSource, FeatureConfiguration.class, true);
+			TableUtils.dropTable(connectionSource, VaccinationTallySheet.class, true);
+			TableUtils.dropTable(connectionSource, VaccinationVisit.class, true);
+			TableUtils.dropTable(connectionSource, VaccinationAbsence.class, true);
 
 			if (oldVersion < 30) {
 				TableUtils.dropTable(connectionSource, Config.class, true);
@@ -1563,6 +1642,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 					dao = (AbstractAdoDao<ADO>) new OutbreakDao((Dao<Outbreak, Long>) innerDao);
 				} else if (type.equals(DiseaseClassificationCriteria.class)) {
 					dao = (AbstractAdoDao<ADO>) new DiseaseClassificationCriteriaDao((Dao<DiseaseClassificationCriteria, Long>) innerDao);
+				} else if (type.equals(VaccinationTallySheet.class)) {
+					dao = (AbstractAdoDao<ADO>) new VaccinationTallySheetDao((Dao<VaccinationTallySheet, Long>) innerDao);
+				} else if (type.equals(VaccinationVisit.class)) {
+					dao = (AbstractAdoDao<ADO>) new VaccinationVisitDao((Dao<VaccinationVisit, Long>) innerDao);
+				} else if (type.equals(VaccinationAbsence.class)) {
+					dao = (AbstractAdoDao<ADO>) new VaccinationAbsenceDao((Dao<VaccinationAbsence, Long>) innerDao);
 				} else {
 					throw new UnsupportedOperationException(type.toString());
 				}
@@ -1778,6 +1863,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	public static AggregateReportDao getAggregateReportDao() {
 		return (AggregateReportDao) getAdoDao(AggregateReport.class);
+	}
+
+	public static VaccinationTallySheetDao getVaccinationTallySheetDao() {
+		return (VaccinationTallySheetDao) getAdoDao(VaccinationTallySheet.class);
+	}
+
+	public static VaccinationVisitDao getVaccinationVisitDao() {
+		return (VaccinationVisitDao) getAdoDao(VaccinationVisit.class);
+	}
+
+	public static VaccinationAbsenceDao getVaccinationAbsenceDao() {
+		return (VaccinationAbsenceDao) getAdoDao(VaccinationAbsence.class);
 	}
 
 	/**

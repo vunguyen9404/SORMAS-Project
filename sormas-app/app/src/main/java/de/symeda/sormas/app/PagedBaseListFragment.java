@@ -43,7 +43,9 @@ public abstract class PagedBaseListFragment<TListAdapter extends RecyclerView.Ad
     private Enum listFilter;
 
     protected static <TFragment extends PagedBaseListFragment> TFragment newInstance(Class<TFragment> fragmentClass, Bundle data, Enum listFilter) {
-        data = new Bundler(data).setListFilter(listFilter).get();
+        if (listFilter != null) {
+            data = new Bundler(data).setListFilter(listFilter).get();
+        }
         TFragment fragment = newInstance(fragmentClass, data);
         return fragment;
     }
@@ -82,7 +84,7 @@ public abstract class PagedBaseListFragment<TListAdapter extends RecyclerView.Ad
         this.adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
-            updateEmptyListHint();
+                updateEmptyListHint();
             }
         });
 

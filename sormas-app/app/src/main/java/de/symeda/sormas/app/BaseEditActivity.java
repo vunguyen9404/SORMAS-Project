@@ -57,6 +57,7 @@ public abstract class BaseEditActivity<ActivityRootEntity extends AbstractDomain
 
     private MenuItem saveMenu = null;
     private MenuItem newMenu = null;
+    private MenuItem deleteMenu = null;
 
     @Override
     protected boolean isSubActivity() {
@@ -224,6 +225,7 @@ public abstract class BaseEditActivity<ActivityRootEntity extends AbstractDomain
 
         saveMenu = menu.findItem(R.id.action_save);
         newMenu = menu.findItem(R.id.action_new);
+        deleteMenu = menu.findItem(R.id.action_delete);
 
         processActionbarMenu();
 
@@ -238,6 +240,10 @@ public abstract class BaseEditActivity<ActivityRootEntity extends AbstractDomain
 
         if (newMenu != null)
             newMenu.setVisible(hasFragementView && activeFragment.isShowNewAction());
+
+        if (deleteMenu != null) {
+            deleteMenu.setVisible(hasFragementView && activeFragment.isShowDeleteAction());
+        }
     }
 
     public MenuItem getSaveMenu() {

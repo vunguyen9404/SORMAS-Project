@@ -132,7 +132,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Notifica
 
     public static <TActivity extends BaseActivity> void startActivity(Context context, Class<TActivity> toActivity, Bundler bundler) {
         Intent intent = new Intent(context, toActivity);
-        intent.putExtras(bundler.get());
+        if (bundler != null) {
+            intent.putExtras(bundler.get());
+        }
         context.startActivity(intent);
     }
 
@@ -291,6 +293,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Notifica
                     NavigationHelper.goToTasks(getContext());
                 } else if (id == R.id.menu_item_cases) {
                     NavigationHelper.goToCases(getContext());
+                } else if (id == R.id.menu_item_vaccination_campaign) {
+                    NavigationHelper.goToVaccinationCampaign(getContext());
                 } else if (id == R.id.menu_item_aggregate_reports) {
                     NavigationHelper.goToAggregateReports(getContext());
                 } else if (id == R.id.menu_item_contacts) {
@@ -358,6 +362,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Notifica
                 UserReportDialog userReportDialog = new UserReportDialog(this, getClass().getSimpleName(), null);
                 userReportDialog.show();
                 return true;
+
+            case R.id.action_delete:
+                delete();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -397,6 +405,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Notifica
             MenuItem dashboardMenu = menuNav.findItem(R.id.menu_item_dashboard);
             MenuItem taskMenu = menuNav.findItem(R.id.menu_item_tasks);
             MenuItem caseMenu = menuNav.findItem(R.id.menu_item_cases);
+            MenuItem vaccinationCampaignMenu = menuNav.findItem(R.id.menu_item_vaccination_campaign);
             MenuItem aggregateReportsMenu = menuNav.findItem(R.id.menu_item_aggregate_reports);
             MenuItem contactMenu = menuNav.findItem(R.id.menu_item_contacts);
             MenuItem eventMenu = menuNav.findItem(R.id.menu_item_events);
@@ -412,6 +421,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Notifica
 
             if (caseMenu != null)
                 caseMenu.setVisible(ConfigProvider.hasUserRight(UserRight.CASE_VIEW));
+
+            if (vaccinationCampaignMenu != null) {
+                vaccinationCampaignMenu.setVisible(true);
+            }
 
             if (aggregateReportsMenu != null)
                 aggregateReportsMenu.setVisible(ConfigProvider.hasUserRight(UserRight.AGGREGATE_REPORT_VIEW));
@@ -695,6 +708,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Notifica
         throw new NotImplementedException("goToNewView");
     }
 
+    public void delete() {
+        throw new NotImplementedException("delete");
+    }
+
     @Override
     public View getRootView() {
         return rootView;
@@ -724,7 +741,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Notifica
         return activePageItem;
     }
 
-    protected boolean goToNextPage() {
+    public boolean goToNextPage() {
         if (activePagePosition >= pageItems.size() - 1) {
             return false; // last page
         }

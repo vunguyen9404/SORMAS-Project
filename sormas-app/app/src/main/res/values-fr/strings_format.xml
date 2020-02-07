@@ -18,6 +18,7 @@
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 <resources>
+
     <string name="age_with_birth_date_format">%1$s %2$s (%3$s)</string>
     <string name="age_with_dob_and_prepend_format"><b>%1$s:</b> %2$s %3$s (%4$s)</string>
     <string name="date_format">%1$s/%2$s/%3$s</string>
@@ -33,4 +34,6 @@
     <string name="two_strings_format">%1$s %2$s</string>
     <string name="two_strings_with_brackets_format">%1$s (%2$s)</string>
     <string name="two_strings_with_hyphen_format">%1$s - %2$s</string>
+    <string name="three_strings_with_hyphen_format">%1$s %2$s - %3$s</string>
+
 </resources>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SORMAS® - Surveillance Outbreak Response Management & Analysis System
+  ~ Copyright © 2016-2018 Helmholtz-Zentrum für Infektionsforschung GmbH (HZI)
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="contentDescription"
+    android:descendantFocusability="beforeDescendants"
+    android:id="@+id/base_layout">
+
+    <data>
+        <variable name="data" type="de.symeda.sormas.app.backend.vaccination.VaccinationTallySheet"/>
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/main_content"
+            style="@style/LayoutSingleContentSpaceBelowStyle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.symeda.sormas.app.component.controls.ControlTextReadField
+                    android:id="@+id/vaccinationTallySheet_region"
+                    app:value="@{data.region}"
+                    style="@style/ControlFirstOfTwoColumnsStyle" />
+
+                <de.symeda.sormas.app.component.controls.ControlTextReadField
+                    android:id="@+id/vaccinationTallySheet_district"
+                    app:value="@{data.district}"
+                    style="@style/ControlSecondOfTwoColumnsStyle" />
+
+            </LinearLayout>
+
+            <de.symeda.sormas.app.component.controls.ControlTextEditField
+                android:id="@+id/vaccinationTallySheet_village"
+                app:value="@={data.village}"
+                app:required="true"
+                style="@style/ControlSingleColumnStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.symeda.sormas.app.component.controls.ControlSpinnerField
+                    android:id="@+id/vaccinationTallySheet_campaignDay"
+                    app:value="@={data.campaignDay}"
+                    app:required="true"
+                    style="@style/ControlFirstOfTwoColumnsStyle" />
+
+                <de.symeda.sormas.app.component.controls.ControlDateField
+                    android:id="@+id/vaccinationTallySheet_date"
+                    app:value="@={data.date}"
+                    app:required="true"
+                    style="@style/ControlSecondOfTwoColumnsStyle" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.symeda.sormas.app.component.controls.ControlTextEditField
+                    android:id="@+id/vaccinationTallySheet_clusterNumber"
+                    app:value="@={data.clusterNumber}"
+                    app:required="true"
+                    style="@style/ControlFirstOfTwoColumnsStyle" />
+
+                <de.symeda.sormas.app.component.controls.ControlTextEditField
+                    android:id="@+id/vaccinationTallySheet_teamNumber"
+                    app:value="@={data.teamNumber}"
+                    app:required="true"
+                    style="@style/ControlSecondOfTwoColumnsStyle" />
+
+            </LinearLayout>
+
+            <de.symeda.sormas.app.component.controls.ControlTextEditField
+                android:id="@+id/vaccinationTallySheet_clusterSupervisor"
+                app:value="@={data.clusterSupervisor}"
+                style="@style/ControlSingleColumnStyle" />
+
+            <de.symeda.sormas.app.component.controls.ControlTextEditField
+                android:id="@+id/vaccinationTallySheet_communicationSupervisor"
+                app:value="@={data.communicationSupervisor}"
+                style="@style/ControlSingleColumnStyle" />
+
+            <de.symeda.sormas.app.component.controls.ControlTextEditField
+                android:id="@+id/vaccinationTallySheet_volunteer1"
+                app:value="@={data.volunteer1}"
+                style="@style/ControlSingleColumnStyle" />
+
+            <de.symeda.sormas.app.component.controls.ControlTextEditField
+                android:id="@+id/vaccinationTallySheet_volunteer2"
+                app:value="@={data.volunteer2}"
+                style="@style/ControlSingleColumnStyle" />
+
+            <de.symeda.sormas.app.component.controls.ControlTextEditField
+                android:id="@+id/vaccinationTallySheet_socialMobilizer"
+                app:value="@={data.socialMobilizer}"
+                style="@style/ControlSingleColumnStyle" />
+
+            <de.symeda.sormas.app.component.controls.ControlTextEditField
+                android:id="@+id/vaccinationTallySheet_firstHouseOwnerDetails"
+                app:value="@={data.firstHouseOwnerDetails}"
+                app:inputType="textMultiLine"
+                app:singleLine="false"
+                app:maxLines="3"
+                app:textArea="true"
+                style="@style/ControlSingleColumnStyle" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/heading_opv_vials_received"
+                style="@style/SubHeadingStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.symeda.sormas.app.component.controls.ControlTextEditField
+                    android:id="@+id/vaccinationTallySheet_numberOfVialsReceivedFull"
+                    app:value="@={data.numberOfVialsReceivedFull}"
+                    app:inputType="number"
+                    style="@style/ControlFirstOfTwoColumnsStyle" />
+
+                <de.symeda.sormas.app.component.controls.ControlTextEditField
+                    android:id="@+id/vaccinationTallySheet_numberOfVialsReceivedOpen"
+                    app:value="@={data.numberOfVialsReceivedOpen}"
+                    app:inputType="number"
+                    style="@style/ControlSecondOfTwoColumnsStyle" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>
+
