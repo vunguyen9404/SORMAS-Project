@@ -41,7 +41,7 @@ public class StartupShutdownService {
 
 	@PostConstruct
 	public void startup() {
-		I18nProperties.setDefaultLanguage(Language.fromLocaleString(FacadeProvider.getConfigFacade().getCountryLocale()));
+		I18nProperties.setDefaultLanguage(Language.fromLocaleString("vi"));
 	}
 
 	@PreDestroy
